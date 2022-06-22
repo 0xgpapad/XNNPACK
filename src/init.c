@@ -36,7 +36,6 @@
 #include <xnnpack/common.h>
 #include <xnnpack/conv.h>
 #include <xnnpack/dwconv.h>
-#include <xnnpack/depthtospace.h>
 #include <xnnpack/gavgpool.h>
 #include <xnnpack/gemm.h>
 #include <xnnpack/fill.h>
@@ -1251,13 +1250,6 @@ static void init(void) {
         .const_size_ukernel = (xnn_transposec_ukernel_function) xnn_x32_transposec_ukernel__4x4_reuse_dec_zip_neon,
         .tile_size = 32,
       };
-      #ifndef XNN_NO_NCHW_OPERATORS
-        xnn_params.x32.depthtospace2d_chw2hwc = (struct depthtospace2d_chw2hwc_parameters) {
-          .ukernel = (xnn_depthtospace2d_chw2hwc_ukernel_function) xnn_x32_depthtospace2d_chw2hwc_ukernel__scalar,
-          .channel_tile = 1,
-          .pixel_tile = 1,
-        };
-      #endif  // XNN_NO_NCHW_OPERATORS
     #endif  // XNN_NO_X32_OPERATORS
 
     /**************************** XX AArch32 micro-kernels ****************************/
@@ -1782,13 +1774,6 @@ static void init(void) {
         .const_size_ukernel = (xnn_transposec_ukernel_function) xnn_x32_transposec_ukernel__2x4_scalar_int,
         .tile_size = 32,
       };
-      #ifndef XNN_NO_NCHW_OPERATORS
-        xnn_params.x32.depthtospace2d_chw2hwc = (struct depthtospace2d_chw2hwc_parameters) {
-          .ukernel = (xnn_depthtospace2d_chw2hwc_ukernel_function) xnn_x32_depthtospace2d_chw2hwc_ukernel__scalar,
-          .channel_tile = 1,
-          .pixel_tile = 1,
-        };
-      #endif  // XNN_NO_NCHW_OPERATORS
     #endif  // XNN_NO_X32_OPERATORS
 
     /**************************** XX AArch32 Pre-NEON micro-kernels ****************************/
@@ -3313,13 +3298,6 @@ static void init(void) {
       .const_size_ukernel = (xnn_transposec_ukernel_function) xnn_x32_transposec_ukernel__4x4_aarch64_neon_tbl,
       .tile_size = 32,
     };
-    #ifndef XNN_NO_NCHW_OPERATORS
-      xnn_params.x32.depthtospace2d_chw2hwc = (struct depthtospace2d_chw2hwc_parameters) {
-        .ukernel = (xnn_depthtospace2d_chw2hwc_ukernel_function) xnn_x32_depthtospace2d_chw2hwc_ukernel__scalar,
-        .channel_tile = 1,
-        .pixel_tile = 1,
-      };
-    #endif  // XNN_NO_NCHW_OPERATORS
   #endif  // XNN_NO_X32_OPERATORS
 
   /**************************** XX AArch64 micro-kernels ****************************/
@@ -5082,13 +5060,6 @@ static void init(void) {
       .const_size_ukernel = (xnn_transposec_ukernel_function) xnn_x32_transposec_ukernel__4x4_sse,
       .tile_size = 32,
     };
-    #ifndef XNN_NO_NCHW_OPERATORS
-      xnn_params.x32.depthtospace2d_chw2hwc = (struct depthtospace2d_chw2hwc_parameters) {
-        .ukernel = (xnn_depthtospace2d_chw2hwc_ukernel_function) xnn_x32_depthtospace2d_chw2hwc_ukernel__scalar,
-        .channel_tile = 1,
-        .pixel_tile = 1,
-      };
-    #endif  // XNN_NO_NCHW_OPERATORS
   #endif  // XNN_NO_X32_OPERATORS
 
   /**************************** XX x86 micro-kernels ****************************/
@@ -5946,13 +5917,6 @@ static void init(void) {
       .const_size_ukernel = (xnn_transposec_ukernel_function) xnn_x32_transposec_ukernel__2x4_scalar_int,
       .tile_size = 32,
     };
-    #ifndef XNN_NO_NCHW_OPERATORS
-      xnn_params.x32.depthtospace2d_chw2hwc = (struct depthtospace2d_chw2hwc_parameters) {
-        .ukernel = (xnn_depthtospace2d_chw2hwc_ukernel_function) xnn_x32_depthtospace2d_chw2hwc_ukernel__scalar,
-        .channel_tile = 1,
-        .pixel_tile = 1,
-      };
-    #endif  // XNN_NO_NCHW_OPERATORS
   #endif  // XNN_NO_X32_OPERATORS
 
   /**************************** XX WAsm SIMD micro-kernels****************************/
@@ -6637,13 +6601,6 @@ static void init(void) {
       .const_size_ukernel = (xnn_transposec_ukernel_function) xnn_x32_transposec_ukernel__2x4_scalar_int,
       .tile_size = 32,
     };
-    #ifndef XNN_NO_NCHW_OPERATORS
-      xnn_params.x32.depthtospace2d_chw2hwc = (struct depthtospace2d_chw2hwc_parameters) {
-        .ukernel = (xnn_depthtospace2d_chw2hwc_ukernel_function) xnn_x32_depthtospace2d_chw2hwc_ukernel__scalar,
-        .channel_tile = 1,
-        .pixel_tile = 1,
-      };
-    #endif  // XNN_NO_NCHW_OPERATORS
   #endif  // XNN_NO_X32_OPERATORS
 
   /**************************** XX WAsm micro-kernels****************************/
@@ -7196,13 +7153,6 @@ static void init(void) {
       .const_size_ukernel = (xnn_transposec_ukernel_function) xnn_x32_transposec_ukernel__2x4_scalar_int,
       .tile_size = 32,
     };
-    #ifndef XNN_NO_NCHW_OPERATORS
-      xnn_params.x32.depthtospace2d_chw2hwc = (struct depthtospace2d_chw2hwc_parameters) {
-        .ukernel = (xnn_depthtospace2d_chw2hwc_ukernel_function) xnn_x32_depthtospace2d_chw2hwc_ukernel__scalar,
-        .channel_tile = 1,
-        .pixel_tile = 1,
-      };
-    #endif  // XNN_NO_NCHW_OPERATORS
   #endif  // XNN_NO_X32_OPERATORS
 
   /************************** XX RISC-V micro-kernels ***************************/
